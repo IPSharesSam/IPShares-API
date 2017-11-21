@@ -6,6 +6,14 @@ const { User } = require('../models')
 router.post('/users', (req, res, next) => {
   User.register(
     new User({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      streetName: req.body.streetName,
+      streetNumber: req.body.streetNumber,
+      postalCode: req.body.postalCode,
+      country: req.body.country,
+      phoneNumber: req.body.phoneNumber,
+      subscribed: req.body.subscribed,
       email: req.body.email
     }), req.body.password,
     (err, user) => {
@@ -14,8 +22,8 @@ router.post('/users', (req, res, next) => {
         return next(err)
       }
 
-      const { email, createdAt, updatedAt } = user
-      res.status(201).json({ email, createdAt, updatedAt })
+      const { firstName, lastName, streetName, streetNumber, postalCode, country, phoneNumber, subscribed, email, createdAt, updatedAt } = user
+      res.status(201).json({ firstName, lastName, streetName, streetNumber, postalCode, country, phoneNumber, subscribed, email, createdAt, updatedAt })
     }
   )
 })
