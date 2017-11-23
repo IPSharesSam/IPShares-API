@@ -9,6 +9,7 @@ const userSchema = new Schema({
   streetName: { type: String, required: true },
   streetNumber: { type: String, required: true },
   postalCode: { type: String, required: true },
+  city: { type: String, required: true },
   country: { type: String, required: true },
   phoneNumber: { type: String, required: true },
   subscribed: { type: Boolean, default: true },

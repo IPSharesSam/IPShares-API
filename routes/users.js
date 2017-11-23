@@ -1,4 +1,3 @@
-// routes/users.js
 const router = require('express').Router()
 const passport = require('../config/auth')
 const { User } = require('../models')
@@ -11,6 +10,7 @@ router.post('/users', (req, res, next) => {
       streetName: req.body.streetName,
       streetNumber: req.body.streetNumber,
       postalCode: req.body.postalCode,
+      city: req.body.city,
       country: req.body.country,
       phoneNumber: req.body.phoneNumber,
       subscribed: req.body.subscribed,
@@ -24,8 +24,8 @@ router.post('/users', (req, res, next) => {
         return next(err)
       }
 
-      const { firstName, lastName, streetName, streetNumber, postalCode, country, phoneNumber, subscribed, public, tags, email, createdAt, updatedAt } = user
-      res.status(201).json({ firstName, lastName, streetName, streetNumber, postalCode, country, phoneNumber, subscribed, public, tags, email, createdAt, updatedAt })
+      const { firstName, lastName, streetName, streetNumber, postalCode, city, country, phoneNumber, subscribed, public, tags, email, createdAt, updatedAt } = user
+      res.status(201).json({ firstName, lastName, streetName, streetNumber, postalCode, city, country, phoneNumber, subscribed, public, tags, email, createdAt, updatedAt })
     }
   )
 })
