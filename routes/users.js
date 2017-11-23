@@ -14,6 +14,8 @@ router.post('/users', (req, res, next) => {
       country: req.body.country,
       phoneNumber: req.body.phoneNumber,
       subscribed: req.body.subscribed,
+      public: req.body.public,
+      tags: req.body.tags,
       email: req.body.email
     }), req.body.password,
     (err, user) => {
@@ -22,8 +24,8 @@ router.post('/users', (req, res, next) => {
         return next(err)
       }
 
-      const { firstName, lastName, streetName, streetNumber, postalCode, country, phoneNumber, subscribed, email, createdAt, updatedAt } = user
-      res.status(201).json({ firstName, lastName, streetName, streetNumber, postalCode, country, phoneNumber, subscribed, email, createdAt, updatedAt })
+      const { firstName, lastName, streetName, streetNumber, postalCode, country, phoneNumber, subscribed, public, tags, email, createdAt, updatedAt } = user
+      res.status(201).json({ firstName, lastName, streetName, streetNumber, postalCode, country, phoneNumber, subscribed, public, tags, email, createdAt, updatedAt })
     }
   )
 })

@@ -1,0 +1,14 @@
+{
+  "firstName": "Sam",
+  "lastName": "van den Berg",
+  "email": "sam@test.com",
+  "streetName": "Grote Straat",
+  "streetNumber": "5",
+  "postalCode": "1234AB",
+  "country": "Netherlands",
+  "phoneNumber": "555-12001300",
+  "subscribed": true,
+  "public": true,
+  "tags": ["trademarks", "designs", "models"],
+  "password": "abc123"
+}
