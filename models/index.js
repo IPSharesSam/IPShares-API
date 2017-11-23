@@ -1,5 +1,5 @@
 // models/index.js
-const Trademark = require('./trademark')
+const Trademark = require('./property')
 const User = require('./user')
 
 module.exports = {
