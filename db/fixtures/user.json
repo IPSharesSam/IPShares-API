@@ -5,6 +5,7 @@
   "streetName": "Grote Straat",
   "streetNumber": "5",
   "postalCode": "1234AB",
+  "city": "Amsterdam",
   "country": "Netherlands",
   "phoneNumber": "555-12001300",
   "subscribed": true,
