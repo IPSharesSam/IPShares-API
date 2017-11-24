@@ -7,11 +7,8 @@ const authenticate = passport.authorize('jwt', { session: false })
 
 router.get('/trademarks', (req, res, next) => {
   Trademark.find()
-    // Newest trademarks first
     .sort({ createdAt: -1 })
-    // Send the data in JSON format
     .then((trademarks) => res.json(trademarks))
-    // Throw a 500 error if something goes wrong
     .catch((error) => next(error))
   })
   .get('/trademarks/:id', (req, res, next) => {
@@ -23,6 +20,16 @@ router.get('/trademarks', (req, res, next) => {
         res.json(trademark)
       })
       .catch((error) => next(error))
+  })
+  .get('/trademarks/search/:input', (req, res, next) => {
+    const input = req.params.input
+    console.log('---------REACHED SERVER: ', req.params.input)
+    res.json(req.params)
+      // .then((trademark) => {
+      //   if (!trademark) { return next() }
+      //   res.json(trademark)
+      // })
+      // .catch((error) => next(error))
   })
   .post('/trademarks', authenticate, (req, res, next) => {
     let newTrademark = req.body
