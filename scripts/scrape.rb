@@ -3,13 +3,15 @@ require 'mechanize'
 require 'watir'
 require 'json'
 
+puts "running!!!!!!!!!!!!!!!!!!!!!!!!"
+
 browser = Watir::Browser.new
 # agent = Mechanize.new
 
 
 browser.goto('https://www.tmdn.org/tmview/welcome.html')
 browser.link(text: 'Advanced search').click
-browser.input(name: 'ApplicantName').send_keys('WITLOFT')
+browser.input(name: 'ApplicantName').send_keys(ARGV[0])
 browser.input(value: 'Search').click
 browser.table(:id => "grid").wait_until_present
 
@@ -55,7 +57,7 @@ first_element =elements_with_content[0]
 trademarkName = first_element.xpath('//span[@class = "trademarkName"]')
 # puts trademarkName.text
 values = first_element.xpath('//td[@class = "size70"]')
-#
+
 # puts values[0].text
 # puts values[1].text
 # puts values[2].text
@@ -68,12 +70,12 @@ hash.to_json
 
 puts hash
 
-uri = URI('http://localhost:3030/trademarks')
-req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
-req.body = hash.to_json
-res = Net::HTTP.start(uri.hostname, uri.port) do |http|
-  http.request(req)
-end
+# uri = URI('http://localhost:3030/trademarks')
+# req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
+# req.body = hash.to_json
+# res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+#   http.request(req)
+# end
 
 # names_of_vars = first_element.xpath('//table[@class = "marginTopLeftBottomExtraLeft"]//td')
 # trademark_name=names_of_vars.shift
