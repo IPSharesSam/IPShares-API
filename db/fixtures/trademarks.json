@@ -1,0 +1,38 @@
+[
+    {
+        "trademark_name": "First Company Name",
+        "application_number": "1234567890",
+        "application_language": "English",
+        "application_date": "12-12-2012"
+    },
+    {
+        "trademark_name": "Second Company Name",
+        "application_number": "1234567890",
+        "application_language": "English",
+        "application_date": "12-12-2012"
+    },
+    {
+        "trademark_name": "Third Company Name",
+        "application_number": "1234567890",
+        "application_language": "English",
+        "application_date": "12-12-2012"
+    },
+    {
+        "trademark_name": "Fourth Company Name",
+        "application_number": "1234567890",
+        "application_language": "English",
+        "application_date": "12-12-2012"
+    },
+    {
+        "trademark_name": "Fifth Company Name",
+        "application_number": "1234567890",
+        "application_language": "English",
+        "application_date": "12-12-2012"
+    },
+    {
+        "trademark_name": "Sixth Company Name",
+        "application_number": "1234567890",
+        "application_language": "English",
+        "application_date": "12-12-2012"
+    }
+]
