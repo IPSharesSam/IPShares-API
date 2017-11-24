@@ -70,7 +70,7 @@ hash.to_json
 
 puts hash
 
-uri = URI('http://localhost:3030/properties')
+uri = URI('http://localhost:3030/trademarks')
 req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
 req.body = hash.to_json
 res = Net::HTTP.start(uri.hostname, uri.port) do |http|

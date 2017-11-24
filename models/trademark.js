@@ -1,7 +1,7 @@
 const mongoose = require('../config/database')
 const { Schema } = mongoose
 
-const propertieschema = new Schema({
+const trademarkschema = new Schema({
   trademark_name: {type: String },
   application_number: {type: String },
   application_language: {type: String },
@@ -12,4 +12,4 @@ const propertieschema = new Schema({
 });
 
 
-module.exports = mongoose.model('properties', propertieschema)
+module.exports = mongoose.model('trademarks', trademarkschema)

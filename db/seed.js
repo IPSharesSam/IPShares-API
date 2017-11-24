@@ -1,26 +1,26 @@
 
 const request = require('superagent')
 const user = require('./fixtures/user.json')
-// const properties = require('./fixtures/properties.json')
+const trademarks = require('./fixtures/trademarks.json')
 
 const createUrl = (path) => {
   return `${process.env.HOST || `http://localhost:${process.env.PORT || 3030}`}${path}`
 }
 
-// const createProperties = (token) => {
-//   return properties.map((propertie) => {
-//     return request
-//       .post(createUrl('/properties'))
-//       .set('Authorization', `Bearer ${token}`)
-//       .send(propertie)
-//       .then((res) => {
-//         console.log('propertie seeded...', res.body.number)
-//       })
-//       .catch((err) => {
-//         console.error('Error seeding propertie!', err)
-//       })
-//   })
-// }
+const createTrademarks = (token) => {
+  return trademarks.map((trademark) => {
+    return request
+      .post(createUrl('/trademarks'))
+      .set('Authorization', `Bearer ${token}`)
+      .send(trademark)
+      .then((res) => {
+        console.log('trademark seeded...', res.body.trademark_name)
+      })
+      .catch((err) => {
+        console.error('Error seeding trademark!', err)
+      })
+  })
+}
 
 const authenticate = (email, password) => {
   request
@@ -28,7 +28,7 @@ const authenticate = (email, password) => {
     .send({ email, password })
     .then((res) => {
       console.log('Authenticated!')
-      // return createProperties(res.body.token)
+      return createTrademarks(res.body.token)
     })
     .catch((err) => {
       console.error('Failed to authenticate!', err.message)
@@ -39,11 +39,11 @@ request
   .post(createUrl('/users'))
   .send(user)
   .then(() => {
-    console.log('User created!')
+    console.log('Scraper account created!')
     return authenticate(user.email, user.password)
   })
   .catch((err) => {
-    console.error('Could not create user', err.message)
+    console.error('Could not create Scraper account', err.message)
     console.log('Trying to continue...')
     authenticate(user.email, user.password)
   })

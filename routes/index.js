@@ -1,9 +1,9 @@
-const properties = require('./properties')
+const trademarks = require('./trademarks')
 const users = require('./users')
 const sessions = require('./sessions')
 
 module.exports = {
-  properties,
+  trademarks,
   users,
   sessions
 }
