@@ -5,6 +5,17 @@ const { Trademark } = require('../models')
 
 const authenticate = passport.authorize('jwt', { session: false })
 
+var exec = require('child_process').exec
+
+function startScript(input) {
+  exec(`ruby scripts/test.rb ${input}`, function (error, stdout, stderr) {
+    console.log('stdout: ' + stdout);
+    console.log('stderr: ' + stderr);
+    console.log('error: ' + error);
+  });
+  return input
+}
+
 router.get('/trademarks', (req, res, next) => {
   Trademark.find()
     .sort({ createdAt: -1 })
@@ -23,13 +34,15 @@ router.get('/trademarks', (req, res, next) => {
   })
   .get('/trademarks/search/:input', (req, res, next) => {
     const input = req.params.input
-    console.log('---------REACHED SERVER: ', req.params.input)
-    res.json(req.params)
-      // .then((trademark) => {
-      //   if (!trademark) { return next() }
-      //   res.json(trademark)
-      // })
-      // .catch((error) => next(error))
+    console.log('---------REACHED SERVER: ', input)
+
+    startScript(input)
+    // .then((result) => {
+    //     if (!result) { return next() }
+    //     res.json('returning data')
+    //   })
+    //   .catch((error) => next(error))
+    res.json(startScript(input))
   })
   .post('/trademarks', authenticate, (req, res, next) => {
     let newTrademark = req.body
