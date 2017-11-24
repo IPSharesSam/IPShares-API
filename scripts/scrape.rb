@@ -19,8 +19,6 @@ browser.table(:id => "grid").wait_until_present
 #optional for biger companies
 #browser.link(text: '30').click
 
-
-
 page = Nokogiri::HTML(browser.html)
  rows_length=page.xpath('//table[@id="grid"]/tbody/tr').length
 
@@ -76,39 +74,6 @@ req.body = hash.to_json
 res = Net::HTTP.start(uri.hostname, uri.port) do |http|
   http.request(req)
 end
-
-# const createUrl = (path) => {
-#   return `${process.env.HOST || `http://localhost:${process.env.PORT || 3030}`}${path}`
-# }
-
-# const createTrademarks = (token) => {
-#   return trademarks.map((trademark) => {
-#     return request
-#       .post(createUrl('/trademarks'))
-#       .set('Authorization', `Bearer ${token}`)
-#       .send(trademark)
-#       .then((res) => {
-#         console.log('trademark seeded...', res.body.trademark_name)
-#       })
-#       .catch((err) => {
-#         console.error('Error seeding trademark!', err)
-#       })
-#   })
-# }
-
-# const authenticate = (email, password) => {
-#   request
-#     .post(createUrl('/sessions'))
-#     .send({ email, password })
-#     .then((res) => {
-#       console.log('Authenticated!')
-#       return createTrademarks(res.body.token)
-#     })
-#     .catch((err) => {
-#       console.error('Failed to authenticate!', err.message)
-#     })
-# }
-
 
 # names_of_vars = first_element.xpath('//table[@class = "marginTopLeftBottomExtraLeft"]//td')
 # trademark_name=names_of_vars.shift
