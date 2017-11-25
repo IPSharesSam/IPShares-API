@@ -5,15 +5,24 @@ const { Trademark } = require('../models')
 
 const authenticate = passport.authorize('jwt', { session: false })
 
-var exec = require('child_process').exec
+// const exec = require('child_process').exec
+
+// function startScript(input) {
+//   exec(`ruby scripts/test.rb ${input}`, function (error, stdout, stderr) {
+//     console.log('stdout: ' + stdout);
+//     console.log('stderr: ' + stderr);
+//     console.log('error: ' + error);
+//   });
+//   return input
+// }
 
 function startScript(input) {
-  exec(`ruby scripts/test.rb ${input}`, function (error, stdout, stderr) {
-    console.log('stdout: ' + stdout);
-    console.log('stderr: ' + stderr);
-    console.log('error: ' + error);
-  });
-  return input
+  return {  
+      "trademark_name": input,
+      "application_number": "1234567890",
+      "application_language": "NL",
+      "application_date": "12-12-2012"
+  }
 }
 
 router.get('/trademarks', (req, res, next) => {
@@ -34,14 +43,7 @@ router.get('/trademarks', (req, res, next) => {
   })
   .get('/trademarks/search/:input', (req, res, next) => {
     const input = req.params.input
-    console.log('---------REACHED SERVER: ', input)
-
-    startScript(input)
-    // .then((result) => {
-    //     if (!result) { return next() }
-    //     res.json('returning data')
-    //   })
-    //   .catch((error) => next(error))
+    
     res.json(startScript(input))
   })
   .post('/trademarks', authenticate, (req, res, next) => {
