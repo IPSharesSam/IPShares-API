@@ -19,7 +19,6 @@ const authenticate = passport.authorize('jwt', { session: false })
 function startScript(input) {
   return [
     {
-        "owner_id": "123456",
         "owner_name": input,
         "trademark_number": "0987654321",
         "trademark_name": "The Cool Company",
@@ -28,7 +27,6 @@ function startScript(input) {
         "status": "registered"
     },
     {
-        "owner_id": "123456",
         "owner_name": input,
         "trademark_number": "1234567890",
         "trademark_name": "TCC",
@@ -37,7 +35,6 @@ function startScript(input) {
         "status": "expired"
     },
     {
-        "owner_id": "123456",
         "owner_name": input,
         "trademark_number": "5432109876",
         "trademark_name": "Company Cool",
@@ -46,7 +43,6 @@ function startScript(input) {
         "status": "refused"
     },
     {
-        "owner_id": "123456",
         "owner_name": input,
         "trademark_number": "6789012345",
         "trademark_name": "Way Cool",
@@ -55,7 +51,6 @@ function startScript(input) {
         "status": "registered"
     },
     {
-        "owner_id": "123456",
         "owner_name": input,
         "trademark_number": "0987612345",
         "trademark_name": "Coolio",
