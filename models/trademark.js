@@ -2,7 +2,6 @@ const mongoose = require('../config/database')
 const { Schema } = mongoose
 
 const trademarkschema = new Schema({
-  owner_id: { type: String },
   owner_name: { type: String },  
   trademark_number: { type: String },
   trademark_name: { type: String },
