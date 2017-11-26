@@ -80,7 +80,9 @@ router.get('/trademarks', (req, res, next) => {
   .get('/trademarks/search/:input', (req, res, next) => {
     const input = req.params.input
     
-    res.json(startScript(input))
+    setTimeout(() => (res.json(startScript(input))),5000)
+    
+    
   })
   .post('/trademarks', authenticate, (req, res, next) => {
     let newTrademark = req.body

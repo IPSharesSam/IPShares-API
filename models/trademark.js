@@ -14,3 +14,4 @@ const trademarkschema = new Schema({
 });
 
 module.exports = mongoose.model('trademarks', trademarkschema)
+  
