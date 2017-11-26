@@ -2,97 +2,42 @@ require 'rubygems'
 require 'mechanize'
 require 'watir'
 require 'json'
+require 'open-uri'
 
-puts "running!!!!!!!!!!!!!!!!!!!!!!!!"
-
-browser = Watir::Browser.new
-# agent = Mechanize.new
+url = 'http://www.wipo.int/branddb/en/index.jsp#'
 
 
-browser.goto('https://www.tmdn.org/tmview/welcome.html')
-browser.link(text: 'Advanced search').click
-browser.input(name: 'ApplicantName').send_keys(ARGV[0])
-browser.input(value: 'Search').click
-browser.table(:id => "grid").wait_until_present
+browser = Watir::Browser.new :chrome, headless: true
+browser.goto(url)
 
-#mikes code advice
-# page.css("td.tmName__column.grid__tmName").map(&:title)
+browser.link(text: 'Names').click
 
-#optional for biger companies
-#browser.link(text: '30').click
+ browser.input(id: 'HOL_input').send_keys(ARGV[0])
+ browser.link(:visible_text => /search/).click
+ browser.link(:visible_text => /options/).click
+ browser.link(:visible_text => /Add All/).click
+ browser.button(:visible_text => /Ok/).click
 
-page = Nokogiri::HTML(browser.html)
- rows_length=page.xpath('//table[@id="grid"]/tbody/tr').length
+ Watir::Wait.until { browser.text.include? 'Brand' }
+ doc = Nokogiri::HTML(browser.html)
+ # rows_length=page.xpath('//table[@id="grid"]/tbody/tr').length
+ number_of_rows =doc.xpath('//tr[@role = "row"]').count
 
+ i = 0
+ while i <= number_of_rows-3 do
 
-first_hit_name = (page.xpath('//table[@id="grid"]/tbody/tr[2]/td[5]')).text
+   elements = doc.xpath('//tr[@id = "' + i.to_s + '"]//td[@role = "gridcell"]')
+   hash = { owner_name: elements[11].text,
+          trademark_name: elements[6].text,
+          trademark_number: elements[13].text,
+          application_date: elements[15].text,
+          registration_date: elements[14].text,
+          status: elements[8].text}
 
-application_number = (page.xpath('//table[@id="grid"]/tbody/tr[2]/td[8]')).text
+  puts hash.to_json
 
-browser.link(text: first_hit_name).click
+   i = i + 1
+ end
 
-whole_text_of_frame = browser.iframes.first.text.gsub!(/.*?(?=sections)/im, "")
-
-
-#my attempts
-# browser.input(name: "localeCode").wait_until_present
-# browser.wait_until(browser.text.include("Recordals"))
-# browser.img(:id => 'anchorTrademark').wait_until_present
-#Watir::Wait.until { browser.text.include? 'List of goods and services' }
-#Watir::Wait.until { browser.img(id: "anchorOfficedetails").visible? }
-Watir::Wait.until { browser.iframes.first.text.include? 'Renewals' }
-
-
-page = Nokogiri::HTML(browser.html)
-
-
-
-#getting
-#//td[@class = "size70"]
-
-elements_with_content = page.xpath('//table[@class = "detail"]')
-#code for a first table
-first_element =elements_with_content[0]
-
-trademarkName = first_element.xpath('//span[@class = "trademarkName"]')
-# puts trademarkName.text
-values = first_element.xpath('//td[@class = "size70"]')
-
-# puts values[0].text
-# puts values[1].text
-# puts values[2].text
-hash = { trademark_name: trademarkName.text,
-        application_number: values[0].text,
-        application_language: values[1].text,
-        application_date:values[2].text}
-
-hash.to_json
-
-puts hash
-
-# uri = URI('http://localhost:3030/trademarks')
-# req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
-# req.body = hash.to_json
-# res = Net::HTTP.start(uri.hostname, uri.port) do |http|
-#   http.request(req)
-# end
-
-# names_of_vars = first_element.xpath('//table[@class = "marginTopLeftBottomExtraLeft"]//td')
-# trademark_name=names_of_vars.shift
-# names_of_vars.shift
-# names_of_vars.shift
-# puts "Trademark name : " + trademark_name
-# names_of_vars.each_slice(2) do |a1,a2|
-#   print a1.text + " : "
-#   unless a2 == nil
-#     puts a2.text
-#   end
-# end
-
-# second_element = elements_with_content[1]
-# to get inside more tables in the same element
-# //table[@class = 'detail marginTopLeftBottom']
-# require 'pry' ; binding.pry
-# second_element.search('.//table[@class = "subdetail"]').remove
-#require 'pry' ; binding.pry
-# puts second_element.text
+# # require 'pry' ; binding.pry
+# browser.table(:id => "grid").wait_until_present
