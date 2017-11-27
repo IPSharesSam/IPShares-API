@@ -10,18 +10,21 @@ browser = Watir::Browser.new :chrome, headless: true
 browser.goto(url)
 browser.link(text: 'Names').click
 browser.input(id: 'HOL_input').send_keys(ARGV[0])
-browser.link(:text => /search/).click
-browser.link(:text => /options/).click
-browser.link(:text => /Add All/).click
-browser.button(:text => /Ok/).click
-
+Watir::Wait.until { browser.text.include? 'search' }
+browser.send_keys :enter
+Watir::Wait.until { browser.text.include? 'options' }
+browser.link(:visible_text => /options/).click
+Watir::Wait.until { browser.text.include? 'Add All' }
+browser.link(:visible_text => /Add All/).click
+Watir::Wait.until { browser.text.include? 'Ok' }
+browser.button(:visible_text => /Ok/).click
 Watir::Wait.until { browser.text.include? 'Brand' }
 doc = Nokogiri::HTML(browser.html)
 number_of_rows =doc.xpath('//tr[@role = "row"]').count
 
-results = []
-
+@results = []
 i = 0
+
 while i <= number_of_rows-3 do
 
   elements = doc.xpath('//tr[@id = "' + i.to_s + '"]//td[@role = "gridcell"]')
@@ -34,10 +37,11 @@ while i <= number_of_rows-3 do
     status: elements[8].text
   }
 
-  results << hash
+  @results << hash
 
   i = i + 1
 
- end
+end
 
- puts results
+puts @results.to_json
+@results.to_json

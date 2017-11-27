@@ -34,7 +34,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.4)
-    watir (6.9.1)
+    watir (6.10.0)
       selenium-webdriver (~> 3.4, >= 3.4.1)
     webrobots (0.1.2)
 
@@ -48,4 +48,4 @@ DEPENDENCIES
   watir
 
 BUNDLED WITH
-   1.15.4
+   1.16.0
