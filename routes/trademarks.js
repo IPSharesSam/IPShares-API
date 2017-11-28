@@ -76,9 +76,9 @@ router.get('/trademarks', (req, res, next) => {
       })
       .catch((error) => next(error))
   })
-  .get('/trademarks/search/:input', (req, res, next) => {
-    const input = req.params.input
-    
+  .post('/trademarks/search', (req, res, next) => {
+    console.log(req.body)
+    const { input } = req.body
     res.json(startScript(input))
     
   })
