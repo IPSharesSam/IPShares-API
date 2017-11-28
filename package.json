@@ -22,11 +22,10 @@
     "passport-local-mongoose": "^4.4.0",
     "socket.io": "^2.0.4",
     "socketio-jwt-auth": "^0.0.6",
+    "superagent": "^3.8.1",
     "sync-exec": "^0.6.2"
   },
-  "devDependencies": {
-    "superagent": "^3.8.0"
-  },
+  "devDependencies": {},
   "engines": {
     "node": "8.5.x",
     "npm": "5.3.x",
