@@ -1,4 +1,3 @@
-// routes/trademarks.js
 const router = require('express').Router()
 const passport = require('../config/auth')
 const { Trademark } = require('../models')
@@ -13,8 +12,8 @@ const exec = require('sync-exec');
 //   return JSON.parse(result.stdout)
 // }
 
-// DUMMY DATA FOR TESTING PURPOSES
 
+// DUMMY DATA FOR TESTING PURPOSES
 function startScript(input) {
   return [
     {
@@ -516,22 +515,24 @@ router.get('/trademarks', (req, res, next) => {
       })
       .catch((error) => next(error))
   })
-  .post('/trademarks/search', (req, res, next) => {
-    const { input } = req.body
-    console.log(input)
-    // res.json(startScript(input))
-    const result = startScript(input)
-    setTimeout(function () {
-      res.json(result)
-    }, 5000)
-  })
   .post('/trademarks', authenticate, (req, res, next) => {
     let newTrademark = req.body
-    newTrademark.authorId = req.account._id
+    newTrademark.userId = req.account._id
 
     Trademark.create(newTrademark)
       .then((trademark) => res.json(trademark))
       .catch((error) => next(error))
+  })
+  .post('/trademarks/user', authenticate, (req, res, next) => {
+    Trademark.find({ userId: req.account._id })
+    .sort({ createdAt: -1 })
+    .then((trademarks) => res.json(trademarks))
+    .catch((error) => next(error))
+  })
+  .post('/trademarks/search', (req, res, next) => {
+    const { input } = req.body
+    res.json(startScript(input))
+    
   })
   .put('/trademarks/:id', authenticate, (req, res, next) => {
     const id = req.params.id
