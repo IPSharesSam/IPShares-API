@@ -1,4 +1,4 @@
-AdvisorProfileconst router = require('express').Router()
+const router = require('express').Router()
 const { AdvisorProfile } = require('../models')
 
 router.get('/advisor/:id', (req, res, next) => {

@@ -1,4 +1,4 @@
-CreatorProfileconst router = require('express').Router()
+const router = require('express').Router()
 const { CreatorProfile } = require('../models')
 
 router.get('/creator/:id', (req, res, next) => {
