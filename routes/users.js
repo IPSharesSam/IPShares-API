@@ -7,15 +7,6 @@ router.post('/users', (req, res, next) => {
     new User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      streetName: req.body.streetName,
-      streetNumber: req.body.streetNumber,
-      postalCode: req.body.postalCode,
-      city: req.body.city,
-      country: req.body.country,
-      phoneNumber: req.body.phoneNumber,
-      subscribed: req.body.subscribed,
-      public: req.body.public,
-      tags: req.body.tags,
       email: req.body.email
     }), req.body.password,
     (err, user) => {
@@ -24,8 +15,8 @@ router.post('/users', (req, res, next) => {
         return next(err)
       }
 
-      const { firstName, lastName, streetName, streetNumber, postalCode, city, country, phoneNumber, subscribed, public, tags, email, createdAt, updatedAt } = user
-      res.status(201).json({ firstName, lastName, streetName, streetNumber, postalCode, city, country, phoneNumber, subscribed, public, tags, email, createdAt, updatedAt })
+      const { firstName, lastName, email, createdAt, updatedAt } = user
+      res.status(201).json({ firstName, lastName, email, createdAt, updatedAt })
     }
   )
 })
