@@ -1,7 +1,9 @@
 const router = require('express').Router()
 const { CreatorProfile } = require('../models')
+const passport = require('../config/auth')
+const authenticate = passport.authorize('jwt', { session: false })
 
-router.get('/creator/:id', (req, res, next) => {
+router.get('/creator/:id', authenticate, (req, res, next) => {
     const id = req.params.id
     CreatorProfile.findById(id)
       .then((creatorProfile) => {
@@ -11,7 +13,7 @@ router.get('/creator/:id', (req, res, next) => {
       })
       .catch((error) => next(error))
   })
-  .post('/creator', (req, res, next) => {
+  .post('/creator', authenticate, (req, res, next) => {
     let newCreatorProfile = req.body
 
     CreatorProfile.create(newCreatorProfile)
@@ -21,7 +23,7 @@ router.get('/creator/:id', (req, res, next) => {
       })
       .catch((error) => next(error))
   })
-  .put('/creator/:id', (req, res, next) => {
+  .put('/creator/:id', authenticate, (req, res, next) => {
     const creatorProfileId = req.params.id
     let updaCreatorProfile = req.body
 
@@ -33,7 +35,7 @@ router.get('/creator/:id', (req, res, next) => {
     })
     .catch((error) => next(error))
   })
-  .patch('/creator/:id', (req, res, next) => {
+  .patch('/creator/:id', authenticate, (req, res, next) => {
     const creatorProfileId = req.params.id
     let updaCreatorProfile = req.body
 
@@ -46,7 +48,7 @@ router.get('/creator/:id', (req, res, next) => {
     .catch((error) => next(error))
 
   })
-  .delete('/creator/:id', (req, res, next) => {
+  .delete('/creator/:id', authenticate, (req, res, next) => {
     const id = req.params.id
     console.log(id)
     CreatorProfile.findByIdAndRemove(id)
