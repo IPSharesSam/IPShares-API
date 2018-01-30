@@ -10,6 +10,7 @@ const advisorProfileSchema = new Schema({
   city: { type: String, required: true },
   country: { type: String, required: true },
   phoneNumber: { type: String, required: true },
+  picUrl: { type: String, default: 'https://robohash.org/beataevoluptatesquas.bmp?size=200x200&set=set1' },
   publicAdvisor: { type: Boolean, default: false },
   tags: [],
   clients: [{ type: Schema.Types.ObjectId, ref: 'users' }],

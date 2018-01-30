@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const { AdvisorProfile } = require('../models')
 const passport = require('../config/auth')
+
 const authenticate = passport.authorize('jwt', { session: false })
 
 router.get('/advisor/:id', authenticate, (req, res, next) => {
@@ -27,11 +28,11 @@ router.get('/advisor/:id', authenticate, (req, res, next) => {
     AdvisorProfile.create(newAdvisorProfile)
       .then((advisorProfile) => {
 
-        if(advisorProfile.user._id !== userId){
-          const error = new Error('Unauthorized')
-          error.status = 401
-          return next(error)
-        }
+        // if(advisorProfile.user._id !== userId){
+        //   const error = new Error('Unauthorized')
+        //   error.status = 401
+        //   return next(error)
+        // }
 
         res.status = 201
         res.json(advisorProfile)

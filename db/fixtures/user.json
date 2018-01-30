@@ -2,14 +2,6 @@
   "firstName": "Maurice",
   "lastName": "Buiten",
   "email": "maurice@test.com",
-  "streetName": "Kimsterweg",
-  "streetNumber": "5",
-  "postalCode": "1132MN",
-  "city": "Volendam",
-  "country": "Nederland",
-  "phoneNumber": "+3161234567",
-  "subscribed": false,
-  "public": false,
-  "tags": ["HTML", "CSS", "Javascript"],
   "password": "abc123"
 }
+
