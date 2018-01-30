@@ -21,10 +21,10 @@ const createAdvisorProfiles = (token, user, oldUser) => {
     .set('Authorization', `Bearer ${token}`)
     .send(newProfile)
     .then((res) => {
-      console.log('Trademark seeded...', res.body)
+      console.log('Advisor profile seeded...', res.body)
     })
     .catch((err) => {
-      console.error('Error seeding trademark!', err)
+      console.error('Error seeding advisor profile!', err)
     })
 }
 
