@@ -3,7 +3,7 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const passport = require('./config/auth')
-const { trademarks, users, sessions } = require('./routes')
+const { trademarks, users, sessions, creatorProfiles, advisorProfiles } = require('./routes')
 const http = require('http')
 
 const port = process.env.PORT || 3030
@@ -20,6 +20,8 @@ app
   .use(trademarks)
   .use(users)
   .use(sessions)
+  .use(creatorProfiles)
+  .use(advisorProfiles)
 
   // catch 404 and forward to error handler
   .use((req, res, next) => {

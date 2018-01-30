@@ -6,15 +6,8 @@ const userSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true },
-  streetName: { type: String, required: true },
-  streetNumber: { type: String, required: true },
-  postalCode: { type: String, required: true },
-  city: { type: String, required: true },
-  country: { type: String, required: true },
-  phoneNumber: { type: String, required: true },
-  subscribed: { type: Boolean, default: true },
-  public: { type: Boolean, default: false },
-  tags: [],
+  advisorProfile: { type: Schema.Types.ObjectId, ref: 'advisorProfiles' },
+  creatorProfile: { type: Schema.Types.ObjectId, ref: 'creatorProfiles' },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 })
