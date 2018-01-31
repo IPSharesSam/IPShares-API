@@ -54,6 +54,7 @@ router
           lastName: req.account.lastName,
           tags: advisorProfile.tags,
           city: advisorProfile.city,
+          bio: advisorProfile.bio,
           picUrl: advisorProfile.picUrl
         })
         .then((content) => {
