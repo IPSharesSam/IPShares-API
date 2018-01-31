@@ -22,7 +22,7 @@ module.exports = function makeseeds() {
       city: faker.address.city(),
       country: faker.address.country(),
       phoneNumber: faker.phone.phoneNumber(),
-      picUrl: faker.image.people(),
+      picUrl: faker.image.avatar(),
       publicAdvisor: true,
       tags: addTags()
     };
