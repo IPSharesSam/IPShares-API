@@ -13,6 +13,7 @@ const advisorProfileSchema = new Schema({
   picUrl: { type: String, default: 'https://robohash.org/beataevoluptatesquas.bmp?size=200x200&set=set1' },
   publicAdvisor: { type: Boolean, default: false },
   tags: [],
+  bio: { type: String },
   clients: [{ type: Schema.Types.ObjectId, ref: 'users' }],
   partners: [{ type: Schema.Types.ObjectId, ref: 'users' }],
   createdAt: { type: Date, default: Date.now },
