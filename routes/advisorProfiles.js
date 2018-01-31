@@ -51,7 +51,8 @@ router.get('/advisor/:id', authenticate, (req, res, next) => {
           firstName: req.account.firstName,
           lastName: req.account.lastName,
           tags: advisorProfile.tags,
-          city: advisorProfile.city
+          city: advisorProfile.city,
+          picUrl: advisorProfile.picUrl
         })
         .then((content) => {
           console.log('OJBID', content.objectID);
