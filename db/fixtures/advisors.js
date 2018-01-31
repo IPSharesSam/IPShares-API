@@ -1,5 +1,15 @@
 const faker = require('faker');
 
+function addTags () {
+  const arr = []
+  arr.push(faker.lorem.word())
+  arr.push(faker.lorem.word())
+  arr.push(faker.lorem.word())
+  arr.push(faker.lorem.word())
+  arr.push(faker.lorem.word())
+  return arr
+}
+
 module.exports = function makeseeds() {
   const arr = [];
   let n = 0;
@@ -12,6 +22,9 @@ module.exports = function makeseeds() {
       city: faker.address.city(),
       country: faker.address.country(),
       phoneNumber: faker.phone.phoneNumber(),
+      picUrl: faker.image.people(),
+      publicAdvisor: true,
+      tags: addTags()
     };
     const user = {
       firstName: faker.name.firstName(),

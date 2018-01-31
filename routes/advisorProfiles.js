@@ -8,6 +8,15 @@ const authenticate = passport.authorize('jwt', { session: false });
 const client = algoliasearch(process.env.APP_ID, process.env.API_KEY);
 const index = client.initIndex('advisors');
 
+index.setSettings({
+  searchableAttributes: [
+    'firstName',
+    'lastName',
+    'tags',
+    'city'
+  ]
+});
+
 router.get('/advisor/:id', authenticate, (req, res, next) => {
   const id = req.params.id;
   const userId = req.account._id;
@@ -41,6 +50,8 @@ router.get('/advisor/:id', authenticate, (req, res, next) => {
           objectID: req.account._id,
           firstName: req.account.firstName,
           lastName: req.account.lastName,
+          tags: advisorProfile.tags,
+          city: advisorProfile.city
         })
         .then((content) => {
           console.log('OJBID', content.objectID);
