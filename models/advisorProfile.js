@@ -19,4 +19,4 @@ const advisorProfileSchema = new Schema({
   updatedAt: { type: Date, default: Date.now }
 })
 
-module.exports = mongoose.model('advisorProfile', advisorProfileSchema)
+module.exports = mongoose.model('advisorProfiles', advisorProfileSchema)

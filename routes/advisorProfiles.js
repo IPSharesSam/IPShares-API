@@ -17,24 +17,26 @@ index.setSettings({
   ]
 });
 
-router.get('/advisor/:id', authenticate, (req, res, next) => {
-  const id = req.params.id;
-  const userId = req.account._id;
-  AdvisorProfile.findById(id)
+router
+  .get('/advisor/:id', (req, res, next) => {
+    const id = req.params.id;
+    // const userId = req.account._id;
+
+    AdvisorProfile.findById(id).populate({ path: 'user', select: ['firstName', 'lastName'] })
       .then((advisorProfile) => {
-        if (!advisorProfile) { return next(); }
+        // if (!advisorProfile) { return next(); }
 
-        if (advisorProfile.user._id !== userId) {
-          const error = new Error('Unauthorized');
-          error.status = 401;
-          return next(error);
-        }
-
+        // if (advisorProfile.user._id !== userId) {
+        //   const error = new Error('Unauthorized');
+        //   error.status = 401;
+        //   return next(error);
+        // }
+        console.log(advisorProfile)
         res.status = 200;
         res.json(advisorProfile);
       })
       .catch((error) => next(error));
-})
+  })
   .post('/advisor', authenticate, (req, res, next) => {
     const newAdvisorProfile = req.body;
     // const userId = req.account._id;

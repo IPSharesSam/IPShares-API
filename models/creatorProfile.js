@@ -16,4 +16,4 @@ const creatorProfileSchema = new Schema({
   updatedAt: { type: Date, default: Date.now }
 })
 
-module.exports = mongoose.model('creatorProfile', creatorProfileSchema)
+module.exports = mongoose.model('creatorProfiles', creatorProfileSchema)
