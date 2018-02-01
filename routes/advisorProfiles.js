@@ -52,7 +52,6 @@ router
           objectID: req.account._id,
           firstName: req.account.firstName,
           lastName: req.account.lastName,
-          advisorProfileID: advisorProfile._id,
           tags: advisorProfile.tags,
           city: advisorProfile.city,
           picUrl: advisorProfile.picUrl
