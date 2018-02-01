@@ -8,7 +8,6 @@ const createUrl = (path) => {
   if (process.env.NODE_ENV === 'development') {
     return ['http://localhost:3030', path].join('/')
   }
-  console.log(['https://damp-reaches-81205.herokuapp.com', path].join('/'))
   return ['https://damp-reaches-81205.herokuapp.com', path].join('/')  
 };
 
@@ -20,7 +19,7 @@ const createAdvisorProfiles = (token, user, oldUser) => {
   var newProfile = oldUser.advisorProfile;
   newProfile.user = user.body._id;
   return request
-    .post(createUrl('/advisor'))
+    .post(createUrl('advisor'))
     .set('Authorization', `Bearer ${token}`)
     .send(newProfile)
     .then((res) => {
@@ -37,12 +36,12 @@ const authenticate = (user) => {
   var password = user.password;
   var dets = { email, password };
   request
-    .post(createUrl('/sessions'))
+    .post(createUrl('sessions'))
     .send(dets)
     .then((res) => {
       console.log('Authenticated!');
       request
-        .get(createUrl('/users/me'))
+        .get(createUrl('users/me'))
         .set('Authorization', `Bearer ${res.body.token}`)
         .then(getres => { createAdvisorProfiles(res.body.token, getres, user); });
       return res;
@@ -53,7 +52,7 @@ const authenticate = (user) => {
 var newAdvisors = advisors();
 for (let user of newAdvisors) {
   request
-    .post(createUrl('/users'))
+    .post(createUrl('users'))
     .send(user)
     .then(() => {
       console.log('Account created!');
