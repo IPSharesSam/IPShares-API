@@ -10,7 +10,7 @@ const port = process.env.PORT || 3030;
 console.log(port)
 
 var corsOptions = {
-  origin: '*',
+  origin: 'https://ipshares-react.herokuapp.com',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
