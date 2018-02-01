@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { AdvisorProfile } = require('../models');
+const { AdvisorProfile, AdvisorRating } = require('../models');
 const passport = require('../config/auth');
 const algoliasearch = require('algoliasearch');
 require('dotenv').config();
@@ -7,6 +7,7 @@ require('dotenv').config();
 const authenticate = passport.authorize('jwt', { session: false });
 const client = algoliasearch(process.env.APP_ID, process.env.API_KEY);
 const index = client.initIndex('advisors');
+
 
 index.setSettings({
   searchableAttributes: [
@@ -21,9 +22,16 @@ router
   .get('/advisor/:id', (req, res, next) => {
     const id = req.params.id;
     // const userId = req.account._id;
-
-    AdvisorProfile.findById(id).populate({ path: 'user', select: ['firstName', 'lastName'] })
+    AdvisorProfile.findById(id).populate({ path: 'advisorRating' }).populate({ path: 'user', select: ['firstName', 'lastName'] })
       .then((advisorProfile) => {
+
+        AdvisorRating.findById(advisorProfile.user._id)
+          .then((ratings) => {
+            const rati = !ratings ? [] : ratings
+            advisorProfile.ratings = rati;
+            res.status = 200;
+            res.json(advisorProfile);
+          })
         // if (!advisorProfile) { return next(); }
 
         // if (advisorProfile.user._id !== userId) {
@@ -31,9 +39,7 @@ router
         //   error.status = 401;
         //   return next(error);
         // }
-        console.log(advisorProfile)
-        res.status = 200;
-        res.json(advisorProfile);
+
       })
       .catch((error) => next(error));
   })
@@ -50,6 +56,7 @@ router
 
         index.addObject({
           objectID: req.account._id,
+          advisorProfileId: advisorProfile._id,
           firstName: req.account.firstName,
           lastName: req.account.lastName,
           tags: advisorProfile.tags,

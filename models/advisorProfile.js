@@ -16,6 +16,7 @@ const advisorProfileSchema = new Schema({
   bio: { type: String },
   clients: [{ type: Schema.Types.ObjectId, ref: 'users' }],
   partners: [{ type: Schema.Types.ObjectId, ref: 'users' }],
+  ratings: [{ type: Schema.Types.ObjectId, ref: 'advisorRatings' }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 })
