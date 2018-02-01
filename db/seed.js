@@ -5,10 +5,10 @@ const request = require('superagent');
 const advisors = require('./fixtures/advisors.js');
 
 const createUrl = (path) => {
-  if (process.env.NODE_ENV === 'production') {
-    return ['https://damp-reaches-81205.herokuapp.com', path].join('/')
+  if (process.env.NODE_ENV === 'development') {
+    return ['http://localhost:3030', path].join('/')
   }
-  return ['http://localhost:3030', path].join('/')
+  return ['https://damp-reaches-81205.herokuapp.com', path].join('/')  
 };
 
 // const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/ipshares'
