@@ -21,25 +21,17 @@ index.setSettings({
 router
   .get('/advisor/:id', (req, res, next) => {
     const id = req.params.id;
-    // const userId = req.account._id;
-    AdvisorProfile.findById(id).populate({ path: 'advisorRating' }).populate({ path: 'user', select: ['firstName', 'lastName'] })
-      .then((advisorProfile) => {
 
-        AdvisorRating.findById(advisorProfile.user._id)
+    AdvisorProfile.findById(id)
+    .populate({ path: 'user', select: ['firstName', 'lastName'] })
+      .then((advisorProfile) => {
+        if (!advisorProfile) { return next(); }
+        AdvisorRating.find({advisorId: advisorProfile.user._id})
           .then((ratings) => {
             const rati = !ratings ? [] : ratings
-            advisorProfile.ratings = rati;
             res.status = 200;
-            res.json(advisorProfile);
+            res.json({ ...advisorProfile._doc, ratings: rati });
           })
-        // if (!advisorProfile) { return next(); }
-
-        // if (advisorProfile.user._id !== userId) {
-        //   const error = new Error('Unauthorized');
-        //   error.status = 401;
-        //   return next(error);
-        // }
-
       })
       .catch((error) => next(error));
   })

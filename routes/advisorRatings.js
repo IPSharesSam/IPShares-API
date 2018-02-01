@@ -11,15 +11,7 @@ router
       .catch((error) => next(error))
   })
   .post('/ratings', authenticate, (req, res, next) => {
-    const {advisorId, rating, comment} = req.body;
-    const userId = req.account._id;
-
-    const newRating = {
-      advisorId: advisorId,
-      clientId: userId,
-      rating: rating,
-      comment: comment
-    }
+    const newRating = req.body;
 
     AdvisorRating.create(newRating)
       .then((advisorRating) => {
@@ -35,7 +27,8 @@ router
 
     AdvisorRating.findById(ratingId)
       .then((Rating) => {
-        if(Rating.clientId !== userId){
+        if (!Rating) { return next(); }
+        if(Rating.clientId.toString() !== userId.toString()){
           const error = new Error('Unauthorized')
           error.status = 401
           return next(error)
