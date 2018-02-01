@@ -16,9 +16,8 @@ var corsOptions = {
 
 const app = express();
 // const server = http.Server(app);
-
+app.use(cors(corsOptions))
 app
-  .use(cors(corsOptions))
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
   .use(passport.initialize())
