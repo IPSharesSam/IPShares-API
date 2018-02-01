@@ -8,11 +8,16 @@ const { trademarks, users, sessions, creatorProfiles, advisorProfiles } = requir
 
 const port = process.env.PORT || 3030;
 
+var corsOptions = {
+  origin: 'https://ipshares-react.herokuapp.com/',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 const app = express();
 // const server = http.Server(app);
 
 app
-  .use(cors())
+  .use(cors(corsOptions))
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
   .use(passport.initialize())
