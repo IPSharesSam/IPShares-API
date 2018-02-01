@@ -7,6 +7,7 @@ const { trademarks, users, sessions, creatorProfiles, advisorProfiles } = requir
 // const http = require('http');
 
 const port = process.env.PORT || 3030;
+console.log(port)
 
 var corsOptions = {
   origin: 'https://ipshares-react.herokuapp.com/',
