@@ -2,7 +2,11 @@ const router = require('express').Router();
 const { AdvisorProfile } = require('../models');
 const passport = require('../config/auth');
 const algoliasearch = require('algoliasearch');
-require('dotenv').config();
+
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').config();
+}
+
 
 const authenticate = passport.authorize('jwt', { session: false });
 const client = algoliasearch(process.env.APP_ID, process.env.API_KEY);
