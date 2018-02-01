@@ -8,6 +8,7 @@ const createUrl = (path) => {
   if (process.env.NODE_ENV === 'development') {
     return ['http://localhost:3030', path].join('/')
   }
+  console.log(['https://damp-reaches-81205.herokuapp.com', path].join('/'))
   return ['https://damp-reaches-81205.herokuapp.com', path].join('/')  
 };
 
