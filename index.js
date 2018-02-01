@@ -8,7 +8,7 @@ const { trademarks, users, sessions, creatorProfiles, advisorProfiles } = requir
 
 const port = process.env.PORT || 3030;
 
-const getOrigin = (process.env.NODE_ENV === 'development') ? 'http://localhost:3030' : 'https://ipshares-react.herokuapp.com'
+const getOrigin = (process.env.NODE_ENV === 'development') ? 'http://localhost:3000' : 'https://ipshares-react.herokuapp.com'
 
 var corsOptions = {
   origin: getOrigin,
