@@ -1,7 +1,19 @@
 const router = require('express').Router();
 const { AdvisorRating } = require('../models');
 const passport = require('../config/auth');
+const algoliasearch = require('algoliasearch');
+
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').config();
+}
+
 const authenticate = passport.authorize('jwt', { session: false });
+const client = algoliasearch(process.env.APP_ID, process.env.API_KEY);
+const index = client.initIndex('advisors');
+const calculateAverage = (ratings) => {
+  return ratings.reduce((x, rati) => x + rati.rating, 0)/ratings.length
+}
+
 
 router
   .get('/ratings', (req, res, next) => {
@@ -15,6 +27,21 @@ router
 
     AdvisorRating.create(newRating)
       .then((advisorRating) => {
+
+        AdvisorRating.find({ advisorId: advisorRating.advisorId })
+          .then((ratings) => {
+            if (!ratings) { return next(); }
+            const average = calculateAverage(ratings)
+            index.partialUpdateObject({
+              objectID: advisorRating.advisorId,
+              averageNumber: average
+            })
+            .then((content) => {
+              console.log('OJBID', content.objectID);
+            })
+            .catch(err => console.error(err));
+          })
+
         res.status = 201;
         res.json(advisorRating);
       })
@@ -36,6 +63,22 @@ router
 
         AdvisorRating.findOneAndUpdate(ratingId, { ...updateRating, updatedAt: new Date()  }, { new: true })
           .then((advisorRating) => {
+
+            AdvisorRating.find({ advisorId: advisorRating.advisorId })
+              .then((ratings) => {
+                if (!ratings) { return next(); }
+                const average = calculateAverage(ratings)
+                console.log(average);
+                index.partialUpdateObject({
+                  objectID: advisorRating.advisorId,
+                  averageNumber: average
+                })
+                .then((content) => {
+                  console.log('OJBID', content.objectID);
+                })
+                .catch(err => console.error(err));
+              })
+
             res.status = 201;
             res.json(advisorRating);
           })
