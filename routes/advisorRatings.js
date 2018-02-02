@@ -33,7 +33,8 @@ router
           error.status = 401
           return next(error)
         }
-        AdvisorRating.findOneAndUpdate(ratingId, updateRating)
+
+        AdvisorRating.findOneAndUpdate(ratingId, { ...updateRating, updatedAt: new Date()  }, { new: true })
           .then((advisorRating) => {
             res.status = 201;
             res.json(advisorRating);
