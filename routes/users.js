@@ -14,6 +14,7 @@ router
       (err, user) => {
         if (err) {
           err.status = 422
+          res.status(422).send(err.message)
           return next(err)
         }
 
@@ -32,8 +33,8 @@ router
       // Once authorized, the user data should be in `req.account`!
       if (!req.account) {
         const error = new Error('Unauthorized')
-        error.status = 401
-        next(error)
+        res.status(401).send(error.message)
+        return next(error)
       }
 
       res.json(req.account)
