@@ -36,8 +36,9 @@ router
         res.status(401).send(error.message)
         return next(error)
       }
-
-      res.json(req.account)
+      User.findById(req.account._id).then(user => {
+        res.json(user)
+      })
     }
   )
 
