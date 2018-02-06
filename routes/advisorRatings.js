@@ -57,7 +57,7 @@ router
         if (!Rating) { return next(); }
         if(Rating.clientId.toString() !== userId.toString()){
           const error = new Error('Unauthorized')
-          error.status = 401
+          res.status(401).send(error.message)
           return next(error)
         }
 

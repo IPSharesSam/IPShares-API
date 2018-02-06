@@ -25,6 +25,7 @@ router
         if (!advisorProfile) {
           return next()
         }
+
         AdvisorRating.find({ advisorId: advisorProfile.user._id }).then(
           ratings => {
             const rati = !ratings ? [] : ratings
@@ -42,7 +43,7 @@ router
       .then(advisorProfile => {
         if (!advisorProfile) {
           const error = new Error('Advisor profile not found!!')
-          error.status = 404
+          res.status(404).send(error.message)
           return next(error)
         }
         console.log(advisorProfile)
