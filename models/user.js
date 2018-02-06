@@ -6,8 +6,7 @@ const userSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true },
-  advisorProfile: { type: Schema.Types.ObjectId, ref: 'advisorProfiles' },
-  creatorProfile: { type: Schema.Types.ObjectId, ref: 'creatorProfiles' },
+  type: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 })

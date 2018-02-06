@@ -8,7 +8,8 @@ router
       new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        email: req.body.email
+        email: req.body.email,
+        type: req.body.type
       }),
       req.body.password,
       (err, user) => {
@@ -18,10 +19,10 @@ router
           return next(err)
         }
 
-        const { firstName, lastName, email, createdAt, updatedAt } = user
+        const { firstName, lastName, email, type, createdAt, updatedAt } = user
         res
           .status(201)
-          .json({ firstName, lastName, email, createdAt, updatedAt })
+          .json({ firstName, lastName, email, type, createdAt, updatedAt })
       }
     )
   })

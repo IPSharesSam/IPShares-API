@@ -84,8 +84,7 @@ router
         if (!creatorProfile) {
           return next()
         }
-
-        if (creatorProfile.user._id !== userId) {
+        if (creatorProfile.user._id.toString() !== userId.toString()) {
           const error = new Error('Unauthorized')
           error.status = 401
           return next(error)
@@ -105,8 +104,7 @@ router
         if (!creatorProfile) {
           return next()
         }
-
-        if (creatorProfile.user._id !== userId) {
+        if (creatorProfile.user.toString() !== userId.toString()) {
           const error = new Error('Unauthorized')
           error.status = 401
           return next(error)
