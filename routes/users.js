@@ -35,11 +35,9 @@ router
         error.status = 401
         next(error)
       }
-      User.findById(req.account._id)
-        .populate({ path: 'advisorProfile' })
-        .then(user => {
-          res.json(user)
-        })
+      User.findById(req.account._id).then(user => {
+        res.json(user)
+      })
     }
   )
 
