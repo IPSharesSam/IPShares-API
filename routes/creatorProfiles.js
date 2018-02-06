@@ -75,20 +75,37 @@ router
   })
   .put('/creator/:id', authenticate, (req, res, next) => {
     const creatorProfileId = req.params.id
-    let newProfile = req.body
-    userId = req.account._id
-    CreatorProfile.findOneAndUpdate(creatorProfileId, newProfile, {
-      new: true
-    })
+    const newProfile = req.body
+    const userId = req.account._id
+
+    CreatorProfile.findByIdAndUpdate(
+      creatorProfileId,
+      {
+        ...newProfile,
+        user: userId
+      },
+      { new: true }
+    )
       .then(creatorProfile => {
         if (!creatorProfile) {
           return next()
         }
-        if (creatorProfile.user._id.toString() !== userId.toString()) {
-          const error = new Error('Unauthorized')
-          error.status = 401
-          return next(error)
-        }
+        index
+          .saveObject({
+            objectID: userId,
+            creatorProfileId: creatorProfile._id,
+            type: 'creator',
+            firstName: req.account.firstName,
+            lastName: req.account.lastName,
+            tags: creatorProfile.tags,
+            city: creatorProfile.city,
+            bio: creatorProfile.bio,
+            picUrl: creatorProfile.picUrl
+          })
+          .then(content => {
+            console.log('Updated', content.objectID)
+          })
+          .catch(err => console.error(err))
 
         res.status = 200
         res.json(creatorProfile)
@@ -97,18 +114,37 @@ router
   })
   .patch('/creator/:id', authenticate, (req, res, next) => {
     const creatorProfileId = req.params.id
-    let newProfile = req.body
-    userId = req.account._id
-    CreatorProfile.findOneAndUpdate(creatorProfileId, newProfile, { new: true })
+    const newProfile = req.body
+    const userId = req.account._id
+
+    CreatorProfile.findByIdAndUpdate(
+      creatorProfileId,
+      {
+        ...newProfile,
+        user: userId
+      },
+      { new: true }
+    )
       .then(creatorProfile => {
         if (!creatorProfile) {
           return next()
         }
-        if (creatorProfile.user.toString() !== userId.toString()) {
-          const error = new Error('Unauthorized')
-          error.status = 401
-          return next(error)
-        }
+        index
+          .saveObject({
+            objectID: userId,
+            creatorProfileId: creatorProfile._id,
+            type: 'creator',
+            firstName: req.account.firstName,
+            lastName: req.account.lastName,
+            tags: creatorProfile.tags,
+            city: creatorProfile.city,
+            bio: creatorProfile.bio,
+            picUrl: creatorProfile.picUrl
+          })
+          .then(content => {
+            console.log('Updated', content.objectID)
+          })
+          .catch(err => console.error(err))
 
         res.status = 200
         res.json(creatorProfile)
