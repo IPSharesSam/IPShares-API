@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const authenticate = passport.authorize('jwt', { session: false });
 const client = algoliasearch(process.env.APP_ID, process.env.API_KEY);
-const index = client.initIndex('advisors');
+const index = client.initIndex('profiles');
 const calculateAverage = (ratings) => {
   return ratings.reduce((x, rati) => x + rati.rating, 0)/ratings.length
 }
