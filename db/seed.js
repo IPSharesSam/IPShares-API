@@ -8,7 +8,7 @@ const createUrl = (path) => {
   if (process.env.NODE_ENV === 'development') {
     return ['http://localhost:3030', path].join('/')
   }
-  return ['https://damp-reaches-81205.herokuapp.com', path].join('/')  
+  return ['https://damp-reaches-81205.herokuapp.com', path].join('/')
 };
 
 // const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/ipshares'
@@ -19,7 +19,7 @@ const createAdvisorProfiles = (token, user, oldUser) => {
   var newProfile = oldUser.advisorProfile;
   newProfile.user = user.body._id;
   return request
-    .post(createUrl('advisor'))
+    .post(createUrl(oldUser.type))
     .set('Authorization', `Bearer ${token}`)
     .send(newProfile)
     .then((res) => {
@@ -63,4 +63,3 @@ for (let user of newAdvisors) {
       authenticate(user.email, user.password);
     });
 }
-

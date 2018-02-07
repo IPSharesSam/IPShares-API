@@ -2,13 +2,16 @@ const faker = require('faker');
 
 function addTags () {
   const arr = []
-  arr.push(faker.lorem.word())
-  arr.push(faker.lorem.word())
-  arr.push(faker.lorem.word())
-  arr.push(faker.lorem.word())
-  arr.push(faker.lorem.word())
+  arr.push(faker.name.jobTitle())
   return arr
 }
+
+function getRandom() {
+  return Math.floor(Math.random() * Math.floor(2));
+}
+
+
+const type = [ 'advisor', 'creator' ]
 
 module.exports = function makeseeds() {
   const arr = [];
@@ -19,6 +22,7 @@ module.exports = function makeseeds() {
       streetName: faker.address.streetAddress(),
       streetNumber: '100',
       postalCode: faker.address.zipCode(),
+      bio: faker.lorem.paragraphs(),
       city: faker.address.city(),
       country: faker.address.country(),
       phoneNumber: faker.phone.phoneNumber(),
@@ -32,8 +36,11 @@ module.exports = function makeseeds() {
       email: faker.internet.email(),
       password: faker.internet.password(),
       advisorProfile: adprofile,
+      type: type[getRandom()],
     };
+    console.log(arr)
     arr.push(user);
+
   }
   return arr;
 };

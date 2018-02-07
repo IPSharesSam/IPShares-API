@@ -34,7 +34,7 @@ router
       if (!req.account) {
         const error = new Error('Unauthorized')
         error.status(401)
-        return next(error)
+        console.log(error);
       }
       User.findById(req.account._id).then(user => {
         res.json(user)
