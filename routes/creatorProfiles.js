@@ -16,7 +16,7 @@ index.setSettings({
 })
 
 router
-  .get('/creator/:id', authenticate, (req, res, next) => {
+  .get('/creator/:id', (req, res, next) => {
     const id = req.params.id
 
     CreatorProfile.findById(id)
