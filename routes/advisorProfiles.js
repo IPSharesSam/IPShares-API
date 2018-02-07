@@ -43,7 +43,7 @@ router
       .then(advisorProfile => {
         if (!advisorProfile) {
           const error = new Error('Advisor profile not found!!')
-          res.status(404).send(error.message)
+          error.status(404)
           return next(error)
         }
         console.log(advisorProfile)
@@ -72,7 +72,7 @@ router
           .then(content => {
             console.log('OJBID', content.objectID)
           })
-          .catch(err => console.error(err))
+          .catch(err => next(err))
 
         res.status = 201
         res.json(advisorProfile)
@@ -111,7 +111,7 @@ router
           .then(content => {
             console.log('Updated', content.objectID)
           })
-          .catch(err => console.error(err))
+          .catch(err => next(err))
 
         res.status = 200
         res.json(advisorProfile)
@@ -150,7 +150,7 @@ router
           .then(content => {
             console.log('Updated', content.objectID)
           })
-          .catch(err => console.error(err))
+          .catch(err => next(err))
 
         res.status = 200
         res.json(advisorProfile)
@@ -177,7 +177,7 @@ router
               .then(content => {
                 console.log('Deleted', content.objectID)
               })
-              .catch(err => console.error(err))
+              .catch(err => next(err))
             res.status = 204
           })
           .catch(error => next(error))

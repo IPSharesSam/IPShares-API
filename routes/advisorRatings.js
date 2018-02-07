@@ -39,7 +39,7 @@ router
             .then((content) => {
               console.log('OJBID', content.objectID);
             })
-            .catch(err => console.error(err));
+            .catch(err => next(err));
           })
 
         res.status = 201;
@@ -57,7 +57,7 @@ router
         if (!Rating) { return next(); }
         if(Rating.clientId.toString() !== userId.toString()){
           const error = new Error('Unauthorized')
-          res.status(401).send(error.message)
+          error.status(401)
           return next(error)
         }
 
@@ -76,7 +76,7 @@ router
                 .then((content) => {
                   console.log('OJBID', content.objectID);
                 })
-                .catch(err => console.error(err));
+                .catch(err => next(err));
               })
 
             res.status = 201;

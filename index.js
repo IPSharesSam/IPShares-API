@@ -45,8 +45,8 @@ app
   })
 
   // final error handler
-  .use((err, req, res) => {
-    // res.status(err.status || 500)
+  .use((err, req, res, next) => {
+    res.status(err.status || 500)
     res.send({
       message: err.message,
       error: app.get('env') === 'development' ? err : {}
