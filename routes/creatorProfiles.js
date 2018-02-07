@@ -66,7 +66,7 @@ router
           .then(content => {
             console.log('OJBID', content.objectID)
           })
-          .catch(err => console.error(err))
+          .catch(err => next(err))
 
         res.status = 201
         res.json(creatorProfile)
@@ -105,7 +105,7 @@ router
           .then(content => {
             console.log('Updated', content.objectID)
           })
-          .catch(err => console.error(err))
+          .catch(err => next(err))
 
         res.status = 200
         res.json(creatorProfile)
@@ -144,7 +144,7 @@ router
           .then(content => {
             console.log('Updated', content.objectID)
           })
-          .catch(err => console.error(err))
+          .catch(err => next(err))
 
         res.status = 200
         res.json(creatorProfile)
@@ -171,7 +171,7 @@ router
               .then(content => {
                 console.log('Deleted', content.objectID)
               })
-              .catch(err => console.error(err))
+              .catch(err => next(err))
             res.status = 204
           })
           .catch(error => next(error))
