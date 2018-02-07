@@ -5,11 +5,8 @@ const { Schema } = mongoose
 const advisorProfileSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'users' },
   companyName: { type: String },
-  streetName: { type: String },
-  streetNumber: { type: String },
-  postalCode: { type: String },
-  city: { type: String },
-  country: { type: String },
+  address: { type: String },
+  place_id: { type: String },
   phoneNumber: { type: String },
   picUrl: {
     type: String,
