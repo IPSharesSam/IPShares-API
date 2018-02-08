@@ -132,6 +132,9 @@ router
         if (!advisorProfile) {
           return next()
         }
+        console.log('is the profile public ?', newProfile.checked)
+        console.log('what is the latlng ?', advisorProfile.latlng)
+        // if (newProfile.checked) {
         index
           .saveObject({
             objectID: userId,
@@ -142,14 +145,14 @@ router
             tags: advisorProfile.tags,
             place_id: newProfile.place_id,
             address: newProfile.address,
+            latlng: advisorProfile.latlng,
             bio: advisorProfile.bio,
             picUrl: advisorProfile.picUrl
           })
           .then(content => {
             console.log('Updated', content.objectID)
           })
-          .catch(err => next(err))
-
+        // }
         res.status = 200
         res.json(advisorProfile)
       })

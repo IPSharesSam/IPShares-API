@@ -6,6 +6,7 @@ const advisorProfileSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'users' },
   companyName: { type: String },
   address: { type: String },
+  latlng: { type: Object },
   place_id: { type: String },
   phoneNumber: { type: String },
   picUrl: {
