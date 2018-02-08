@@ -1,6 +1,6 @@
 const faker = require('faker');
 
-function addTags () {
+function addTags() {
   const arr = []
   arr.push(faker.name.jobTitle())
   return arr
@@ -11,7 +11,7 @@ function getRandom() {
 }
 
 
-const type = [ 'advisor', 'creator' ]
+const type = ['advisor', 'creator']
 
 module.exports = function makeseeds() {
   const arr = [];
@@ -19,12 +19,8 @@ module.exports = function makeseeds() {
   while (n < 20) {
     n++;
     const adprofile = {
-      streetName: faker.address.streetAddress(),
-      streetNumber: '100',
-      postalCode: faker.address.zipCode(),
+      latlng: { lat: faker.address.latitude(), lng: faker.address.longitude() },
       bio: faker.lorem.paragraphs(),
-      city: faker.address.city(),
-      country: faker.address.country(),
       phoneNumber: faker.phone.phoneNumber(),
       picUrl: faker.image.avatar(),
       publicAdvisor: true,
