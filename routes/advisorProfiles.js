@@ -64,9 +64,6 @@ router
             type: 'advisor',
             firstName: req.account.firstName,
             lastName: req.account.lastName,
-            tags: advisorProfile.tags,
-            city: advisorProfile.city,
-            bio: advisorProfile.bio,
             picUrl: advisorProfile.picUrl
           })
           .then(content => {
@@ -143,7 +140,8 @@ router
             firstName: req.account.firstName,
             lastName: req.account.lastName,
             tags: advisorProfile.tags,
-            city: advisorProfile.city,
+            place_id: newProfile.place_id,
+            address: newProfile.address,
             bio: advisorProfile.bio,
             picUrl: advisorProfile.picUrl
           })
