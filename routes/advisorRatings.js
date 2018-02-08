@@ -55,20 +55,12 @@ router
     AdvisorRating.findById(ratingId)
       .then((Rating) => {
         if (!Rating) { return next(); }
-        if(Rating.clientId.toString() !== userId.toString()){
-          const error = new Error('Unauthorized')
-          error.status(401)
-          return next(error)
-        }
-
-        AdvisorRating.findOneAndUpdate(ratingId, { ...updateRating, updatedAt: new Date()  }, { new: true })
+        AdvisorRating.findByIdAndUpdate(ratingId, { ...updateRating, updatedAt: new Date()  }, { new: true })
           .then((advisorRating) => {
-
             AdvisorRating.find({ advisorId: advisorRating.advisorId })
               .then((ratings) => {
                 if (!ratings) { return next(); }
                 const average = calculateAverage(ratings)
-                console.log(average);
                 index.partialUpdateObject({
                   objectID: advisorRating.advisorId,
                   averageNumber: average
@@ -78,10 +70,10 @@ router
                 })
                 .catch(err => next(err));
               })
-
-            res.status = 201;
-            res.json(advisorRating);
+              res.status = 201;
+              res.json(advisorRating);
           })
+
       })
       .catch((error) => next(error));
   })
