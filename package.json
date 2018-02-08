@@ -7,8 +7,8 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV='development' nodemon . --inspect",
-    "seed": "NODE_ENV='development' node db/seed.js"
+    "start": "nodemon . --inspect",
+    "seed": "node db/seed.js"
   },
   "dependencies": {
     "algoliasearch": "^3.24.9",
