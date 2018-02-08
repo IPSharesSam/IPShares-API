@@ -19,7 +19,7 @@ module.exports = function makeseeds() {
   while (n < 20) {
     n++;
     const adprofile = {
-      latlng: { lat: faker.address.latitude(), lng: faker.address.longitude() },
+      latlng: { lat: Number(faker.address.latitude()), lng: Number(faker.address.longitude()) },
       bio: faker.lorem.paragraphs(),
       phoneNumber: faker.phone.phoneNumber(),
       picUrl: faker.image.avatar(),
