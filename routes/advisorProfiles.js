@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const authenticate = passport.authorize('jwt', { session: false })
-const client = algoliasearch(process.env.APP_ID, process.env.API_KEY)
+const client = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_API_KEY)
 const index = client.initIndex('profiles')
 
 index.setSettings({
